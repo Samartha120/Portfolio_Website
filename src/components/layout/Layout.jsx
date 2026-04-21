@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import Sidebar from './Sidebar';
+import Sidebar from './SideBar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { Loader } from '../common/Loader';
@@ -19,21 +19,12 @@ export const Layout = ({ children }) => {
       <Modal />
       
       <main className="flex-grow relative z-10 w-full flex flex-col pt-24">
-        <AnimatePresence mode="wait">
-          <motion.div
-             key={location.pathname}
-             initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
-             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-             exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-             transition={{ duration: 0.4 }}
-             className="w-full h-full flex flex-col flex-grow"
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        {children}
       </main>
       
       <Footer />
     </div>
   );
 };
+
+export default Layout;

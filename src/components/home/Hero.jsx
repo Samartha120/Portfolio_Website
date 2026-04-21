@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../common/Button';
 import { ArrowRight, Download, Sparkles } from 'lucide-react';
-import { profile } from '../../data/profile';
+import { profile } from '../../data/Profile';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 
 export const Hero = () => {

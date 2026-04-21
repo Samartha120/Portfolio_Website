@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionTitle } from '../common/SectionTitle';
-import { profile } from '../../data/profile';
+import { profile } from '../../data/Profile';
 
 export const Bio = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../hooks/UseTheme';
 
 const ThemeContext = createContext();
 
@@ -14,3 +14,5 @@ export const ThemeProvider = ({ children }) => {
 };
 
 export const useThemeContext = () => useContext(ThemeContext);
+
+export default ThemeProvider;

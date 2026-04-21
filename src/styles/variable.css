@@ -1,0 +1,13 @@
+:root {
+	--app-bg: #050505;
+	--app-surface: #111111;
+	--app-primary: #3b82f6;
+	--app-secondary: #8b5cf6;
+	--app-accent: #10b981;
+}
+
+/* Keep dark theme as default per requirements */
+html.dark {
+	color-scheme: dark;
+}
+
