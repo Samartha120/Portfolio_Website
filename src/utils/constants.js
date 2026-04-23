@@ -1,5 +1,5 @@
 export const APP_NAME = "Portfolio";
-export const AUTHOR_NAME = "John Doe";
+export const AUTHOR_NAME = "Dev Portfolio";
 export const AUTHOR_ROLE = "Senior Frontend Architect";
 export const CONTACT_EMAIL = "hello@johndoe.com";
 export const GITHUB_URL = "https://github.com";

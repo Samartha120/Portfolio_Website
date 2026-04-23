@@ -5,6 +5,7 @@ import { SectionTitle } from '../../components/ui/SectionTitle';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { Send, CheckCircle, Mail, MapPin, Phone } from 'lucide-react';
+import { profile } from '../../data/Profile';
 
 export default function ContactSection() {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
@@ -35,37 +36,37 @@ export default function ContactSection() {
            initial={{ opacity: 0, x: -30 }}
            whileInView={{ opacity: 1, x: 0 }}
            viewport={{ once: true }}
-           transition={{ duration: 0.6 }}
+           transition={{ duration: 0.5, ease: 'easeOut' }}
            className="lg:col-span-1 space-y-6"
         >
           <Card hover={false} className="p-8 h-full flex flex-col justify-center border-white/5 bg-white/[0.02]">
             <h3 className="text-2xl font-bold text-white mb-8">Get in Touch</h3>
             <div className="space-y-8">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                <div className="w-12 h-12 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/70">
                   <Mail size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-white/50 mb-1">Email</p>
-                  <p className="text-white font-medium">hello@example.com</p>
+                  <p className="text-white font-medium">{profile.email}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary">
+                <div className="w-12 h-12 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/70">
                   <Phone size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-white/50 mb-1">Phone</p>
-                  <p className="text-white font-medium">+1 (234) 567-890</p>
+                  <p className="text-white font-medium">{profile.phone}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                <div className="w-12 h-12 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/70">
                   <MapPin size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-white/50 mb-1">Location</p>
-                  <p className="text-white font-medium">San Francisco, CA</p>
+                  <p className="text-white font-medium">{profile.location}</p>
                 </div>
               </div>
             </div>
@@ -76,13 +77,11 @@ export default function ContactSection() {
            initial={{ opacity: 0, x: 30 }}
            whileInView={{ opacity: 1, x: 0 }}
            viewport={{ once: true }}
-           transition={{ duration: 0.6 }}
+           transition={{ duration: 0.5, ease: 'easeOut' }}
            className="lg:col-span-2"
         >
           <Card hover={false} className="p-8 md:p-12 relative overflow-hidden border-white/5">
-            {/* Decorative background blur */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -z-10 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-full blur-[80px] -z-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent -z-10 pointer-events-none" />
 
             {formState === 'success' ? (
               <motion.div 
@@ -148,7 +147,6 @@ export default function ContactSection() {
                   variant="primary" 
                   size="lg" 
                   className="w-full mt-4" 
-                  glow
                   icon={formState === 'submitting' ? null : <Send size={18} />}
                   disabled={formState === 'submitting'}
                 >

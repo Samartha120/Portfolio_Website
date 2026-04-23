@@ -15,6 +15,20 @@ export default function HeroSection() {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  const handleViewWork = () => {
+    const el = document.getElementById('projects');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleDownloadResume = () => {
+    const a = document.createElement('a');
+    a.href = '/resume.pdf';
+    a.download = 'resume.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
   return (
     <Section id="home" className="min-h-[100svh] flex items-center justify-center pt-20 overflow-hidden relative" ref={ref}>
       {/* Dynamic Background Elements */}
@@ -58,8 +72,8 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-lg md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light leading-relaxed"
         >
-          Senior Frontend Developer specializing in React and Framer Motion. 
-          Designing hyper-polished, <strong className="text-white font-medium">industry-leading</strong> user interfaces.
+          Senior Frontend Engineer specializing in React and modern UI systems.
+          Building <strong className="text-white font-medium">accessible, performance‑focused</strong> product experiences.
         </motion.p>
 
         <motion.div
@@ -68,10 +82,25 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full"
         >
-          <Button variant="primary" size="lg" className="w-full sm:w-auto text-lg h-14 px-8" glow icon={<ArrowRight size={20} />}>
+          <Button
+            variant="primary"
+            size="lg"
+            className="w-full sm:w-auto text-lg h-14 px-8"
+            glow
+            icon={<ArrowRight size={20} />}
+            type="button"
+            onClick={handleViewWork}
+          >
             View My Work
           </Button>
-          <Button variant="secondary" size="lg" className="w-full sm:w-auto text-lg h-14 px-8 group" icon={<Download size={20} className="group-hover:text-primary transition-colors" />}>
+          <Button
+            variant="secondary"
+            size="lg"
+            className="w-full sm:w-auto text-lg h-14 px-8 group"
+            icon={<Download size={20} className="group-hover:text-primary transition-colors" />}
+            type="button"
+            onClick={handleDownloadResume}
+          >
             Download Resume
           </Button>
         </motion.div>

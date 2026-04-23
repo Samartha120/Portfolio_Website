@@ -7,8 +7,10 @@ import { projects } from '../data/projects';
 
 export default function Projects() {
 	const categories = useMemo(() => {
-		const set = new Set(projects.map((p) => p.category));
-		return ['All', ...Array.from(set)];
+		const preferred = ['Web', 'UI', 'Full Stack'];
+		const fromData = Array.from(new Set(projects.map((p) => p.category)));
+		const rest = fromData.filter((c) => !preferred.includes(c));
+		return ['All', ...preferred.filter((c) => fromData.includes(c)), ...rest];
 	}, []);
 
 	const [active, setActive] = useState('All');

@@ -28,10 +28,10 @@ export const Card = ({ className, children, hover = true, ...props }) => {
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      whileHover={hover ? { y: -5 } : {}}
-      transition={{ duration: 0.3 }}
+      whileHover={hover ? { y: -2 } : {}}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       className={cn(
-        "relative rounded-2xl border border-white/10 bg-white/5 overflow-hidden",
+        "relative rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden shadow-md shadow-black/20",
         className
       )}
       {...props}
@@ -40,11 +40,11 @@ export const Card = ({ className, children, hover = true, ...props }) => {
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 rounded-2xl"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,.1), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,.06), transparent 45%)`,
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.02] to-transparent pointer-events-none rounded-2xl" />
-      <div className="relative h-full z-10 w-full rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-black/20 text-white">
+      <div className="relative h-full z-10 w-full rounded-2xl p-6 md:p-8 bg-black/20 text-white">
         {children}
       </div>
     </motion.div>

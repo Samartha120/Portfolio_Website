@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState('dark'); // Only supporting dark mode per requirements
+  const [theme, setTheme] = useState(() => {
+    const saved = window.localStorage.getItem('theme');
+    return saved === 'soft' ? 'soft' : 'dark';
+  });
 
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    const root = document.documentElement;
+    root.classList.add('dark');
+    root.classList.toggle('theme-soft', theme === 'soft');
+    window.localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    // Kept for signature requirement, but forced dark
-    setTheme('dark');
+    setTheme((prev) => (prev === 'dark' ? 'soft' : 'dark'));
   };
 
   return { theme, toggleTheme };

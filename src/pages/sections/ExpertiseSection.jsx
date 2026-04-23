@@ -53,19 +53,18 @@ export default function ExpertiseSection() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: idx * 0.1, type: "spring", stiffness: 100 }}
+            transition={{ duration: 0.45, delay: idx * 0.06, ease: 'easeOut' }}
             className="h-full"
           >
-            <Card hover={false} className="h-full group flex flex-col items-start gap-6 border-white/[0.05] hover:border-primary/30 transition-colors duration-500">
+            <Card hover={false} className="h-full group flex flex-col items-start gap-6 border-white/10 hover:border-white/20 transition-all duration-300 ease-out">
               <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-white group-hover:bg-primary/20 group-hover:text-primary transition-colors duration-500">
+                <div className="relative p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-white/80 group-hover:text-white transition-colors duration-300">
                   {skill.icon}
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300 mb-3">{skill.title}</h3>
-                <p className="text-white/50 font-light leading-relaxed group-hover:text-white/70 transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-white/90 mb-3">{skill.title}</h3>
+                <p className="text-white/60 font-light leading-relaxed">
                   {skill.desc}
                 </p>
               </div>

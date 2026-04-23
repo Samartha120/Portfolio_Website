@@ -39,7 +39,7 @@ export const Hero = () => {
           variants={fadeInUp}
           className="text-lg md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light leading-relaxed"
         >
-          {profile.role} specializing in highly-polished, <strong className="text-white font-medium">industry-leading</strong> user interfaces.
+          {profile.role} focused on building <strong className="text-white font-medium">accessible, performance‑focused</strong> user interfaces.
         </motion.p>
 
         <motion.div

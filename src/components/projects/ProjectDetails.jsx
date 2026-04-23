@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
@@ -12,6 +12,19 @@ export const ProjectDetails = () => {
 	const project = useMemo(() => {
 		const numericId = Number(id);
 		return projects.find((p) => p.id === numericId) ?? null;
+	}, [id]);
+
+	const previewImages = useMemo(() => {
+		if (!project) return [];
+		const list = Array.isArray(project.images) ? project.images : [];
+		const withPrimary = project.image ? [project.image, ...list] : list;
+		return Array.from(new Set(withPrimary)).filter(Boolean);
+	}, [project]);
+
+	const [activePreview, setActivePreview] = useState(0);
+
+	useEffect(() => {
+		setActivePreview(0);
 	}, [id]);
 
 	if (!project) {
@@ -52,8 +65,16 @@ export const ProjectDetails = () => {
 					<SectionTitle title={project.title} subtitle={project.category} />
 
 					<div className={`w-full h-72 md:h-96 rounded-3xl bg-gradient-to-br ${project.imageBg} border border-white/10 overflow-hidden relative mb-10`}>
-						<div className="absolute inset-0 opacity-25 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')] mix-blend-overlay" />
-						<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+						{project.image && (
+							<img
+								src={project.image}
+								alt={project.title}
+								loading="lazy"
+								className="absolute inset-0 w-full h-full object-cover opacity-80"
+							/>
+						)}
+						<div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')] mix-blend-overlay" />
+						<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 						<div className="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
 							<div>
 								<div className="text-white/70 text-sm font-medium mb-2">Client: {project.client}</div>
@@ -65,7 +86,7 @@ export const ProjectDetails = () => {
 										href={project.demoUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold inline-flex items-center gap-2"
+										className="h-11 px-5 rounded-full bg-white text-black text-sm font-semibold inline-flex items-center gap-2 hover:bg-neutral-200 transition-colors"
 									>
 										Live Demo <ExternalLink size={16} />
 									</a>
@@ -75,7 +96,7 @@ export const ProjectDetails = () => {
 										href={project.repoUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="px-5 py-2.5 rounded-full bg-white/10 text-white text-sm font-semibold inline-flex items-center gap-2 border border-white/10 backdrop-blur-md"
+										className="h-11 px-5 rounded-full border border-white/15 bg-white/[0.02] text-white text-sm font-semibold inline-flex items-center gap-2 hover:bg-white/[0.05] transition-colors"
 									>
 										Repository <Github size={16} />
 									</a>
@@ -92,12 +113,62 @@ export const ProjectDetails = () => {
 									{project.desc}
 								</p>
 
-								<h4 className="text-sm font-bold tracking-widest text-white/40 uppercase mb-4">Highlights</h4>
-								<ul className="space-y-3 text-white/65 font-light">
-									<li className="flex gap-3"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary/70" />Designed for clarity: complex data presented with calm, readable hierarchy.</li>
-									<li className="flex gap-3"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary/70" />Motion used as feedback: transitions guide attention without slowing navigation.</li>
-									<li className="flex gap-3"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary/70" />Component-led architecture to support scaling and iteration.</li>
+								{previewImages.length > 0 && (
+									<div className="mb-10">
+										<h4 className="text-sm font-bold tracking-widest text-white/40 uppercase mb-4">Project Preview</h4>
+										<div className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden">
+											<div className="aspect-[16/9] bg-black/30">
+												<img
+													src={previewImages[Math.min(activePreview, previewImages.length - 1)]}
+													alt={`${project.title} preview`}
+													className="w-full h-full object-cover"
+													loading="lazy"
+												/>
+											</div>
+											{previewImages.length > 1 && (
+												<div className="p-4 flex gap-3 overflow-x-auto">
+													{previewImages.map((src, idx) => {
+														const isActive = idx === activePreview;
+														return (
+															<button
+																key={`${src}-${idx}`}
+																onClick={() => setActivePreview(idx)}
+																className={
+																	`shrink-0 w-24 h-14 rounded-xl overflow-hidden border transition-colors duration-300 ${
+																			isActive ? 'border-primary/50' : 'border-white/10 hover:border-white/20'
+																		}`
+																}
+																type="button"
+															>
+																<img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+															</button>
+														);
+													})}
+												</div>
+											)}
+										</div>
+									</div>
+								)}
+
+								<h4 className="text-sm font-bold tracking-widest text-white/40 uppercase mb-4">Key Features</h4>
+								<ul className="space-y-3 text-white/65 font-light mb-10">
+									{(project.features ?? []).map((feature) => (
+										<li key={feature} className="flex gap-3">
+											<span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary/70" />
+											{feature}
+										</li>
+									))}
 								</ul>
+
+								<h4 className="text-sm font-bold tracking-widest text-white/40 uppercase mb-4">Challenges &amp; Solutions</h4>
+								<div className="space-y-5">
+									{(project.challenges ?? []).map((item, idx) => (
+										<div key={idx} className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+											<div className="text-white/85 font-semibold mb-2">{item.challenge}</div>
+											<div className="text-white/65 font-light leading-relaxed">{item.solution}</div>
+										</div>
+									))}
+								</div>
 							</Card>
 						</div>
 
