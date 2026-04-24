@@ -101,7 +101,7 @@ export default function AboutSection() {
                 
                 <div className="bg-white/[0.02] border border-white/[0.06] p-6 rounded-2xl group-hover:bg-white/[0.03] transition-colors duration-300">
                   <span className="inline-block px-3 py-1 rounded-full bg-white/[0.04] text-white/70 text-xs font-semibold tracking-wider mb-3 border border-white/10">{item.year}</span>
-                  <h3 className="text-2xl font-semibold text-white/90 mb-1">{item.role}</h3>
+                  <h3 className="text-2xl font-semibold text-white/90 group-hover:text-primary transition-colors duration-300 mb-1">{item.role}</h3>
                   <p className="text-white/50 text-sm mb-4 font-medium tracking-wide">{item.company}</p>
                   <p className="text-white/60 font-light leading-relaxed">{item.desc}</p>
                 </div>

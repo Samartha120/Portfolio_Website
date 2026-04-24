@@ -12,6 +12,8 @@ export default {
         primary: 'rgb(var(--app-primary) / <alpha-value>)',
         secondary: 'rgb(var(--app-secondary) / <alpha-value>)',
         accent: 'rgb(var(--app-accent) / <alpha-value>)',
+        white: 'rgb(var(--app-text) / <alpha-value>)',
+        black: 'rgb(var(--app-bg-inverted) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

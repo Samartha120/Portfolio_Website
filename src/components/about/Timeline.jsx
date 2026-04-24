@@ -75,17 +75,19 @@ export const Timeline = () => {
 												}
 											}}
 											className={cn(
-												"pl-12 md:pl-0 rounded-2xl transition-colors duration-300 cursor-pointer outline-none",
-												isActive ? "bg-white/[0.02]" : "hover:bg-white/[0.015]",
+												"group pl-12 md:pl-8 p-6 md:py-8 rounded-2xl transition-all duration-300 cursor-pointer outline-none border",
+												isActive 
+													? "bg-white/[0.03] border-white/10 shadow-sm" 
+													: "border-transparent hover:bg-white/[0.02] hover:border-white/5",
 												"focus-visible:ring-2 focus-visible:ring-primary/30"
 											)}
 										>
 											<div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/50 mb-3">
-												<span className={cn("w-2 h-2 rounded-full transition-colors duration-300", isActive ? "bg-primary" : "bg-primary/70")} />
+												<span className={cn("w-2 h-2 rounded-full transition-colors duration-300", isActive ? "bg-primary" : "bg-primary/70 group-hover:bg-primary")} />
 												{item.type}
 											</div>
 											<div className="text-white/50 text-sm font-medium mb-2">{item.year}</div>
-											<h3 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-2">
+											<h3 className="text-2xl md:text-3xl font-black tracking-tight text-white transition-colors duration-300 group-hover:text-primary mb-2">
 												{item.title}
 											</h3>
 											<div className="text-white/60 font-medium mb-4">{item.org}</div>

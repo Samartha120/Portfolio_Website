@@ -9,6 +9,7 @@ export const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Expertise', href: '/expertise' },
+  { name: 'Case Study', href: '/case-study' },
   { name: 'Projects', href: '/projects' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
@@ -30,7 +31,7 @@ export const Navbar = () => {
       className={cn(
         "fixed top-0 w-full z-40 transition-all duration-300 ease-out",
         scrolled 
-          ? "bg-black/40 backdrop-blur-md border-b border-white/10 py-4 shadow-md shadow-black/30" 
+          ? "bg-surface/80 backdrop-blur-md border-b border-white/10 py-4 shadow-md shadow-black/30" 
           : "bg-transparent py-6"
       )}
     >
@@ -70,18 +71,46 @@ export const Navbar = () => {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 z-50">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/[0.08] transition-colors duration-300 ease-out inline-flex items-center justify-center"
-            aria-label={theme === 'soft' ? 'Switch to dark theme' : 'Switch to soft theme'}
-            title={theme === 'soft' ? 'Dark theme' : 'Soft theme'}
-          >
-            {theme === 'soft' ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
+          <div className="relative group/theme flex items-center">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/[0.08] transition-colors duration-300 ease-out inline-flex items-center justify-center relative overflow-hidden"
+              aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+            >
+              <motion.div
+                initial={false}
+                animate={{
+                  y: theme === 'light' ? -30 : 0,
+                  opacity: theme === 'light' ? 0 : 1,
+                  scale: theme === 'light' ? 0.5 : 1,
+                }}
+                transition={{ duration: 0.4, ease: 'backOut' }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Moon size={18} />
+              </motion.div>
+              <motion.div
+                initial={false}
+                animate={{
+                  y: theme === 'light' ? 0 : 30,
+                  opacity: theme === 'light' ? 1 : 0,
+                  scale: theme === 'light' ? 1 : 0.5,
+                }}
+                transition={{ duration: 0.4, ease: 'backOut' }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Sun size={18} />
+              </motion.div>
+            </button>
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover/theme:opacity-100 pointer-events-none transition-all duration-300 translate-y-1 group-hover/theme:translate-y-0 bg-surface/90 backdrop-blur-xl border border-white/10 px-3 py-1.5 rounded-lg whitespace-nowrap text-xs font-medium text-white/90 shadow-xl z-50 flex items-center gap-2">
+               {theme === 'light' ? <Moon size={12}/> : <Sun size={12}/>}
+               {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+            </div>
+          </div>
           <Link
             to="/contact"
-            className="px-5 py-2.5 text-sm font-medium rounded-full bg-white text-black hover:bg-neutral-200 transition-all duration-300 ease-out active:scale-[0.98] shadow-md shadow-black/20"
+            className="px-5 py-2.5 text-sm font-medium rounded-full bg-white text-black hover:bg-white/90 transition-all duration-300 ease-out active:scale-[0.98] shadow-md shadow-black/20"
           >
             Hire Me
           </Link>
@@ -89,15 +118,39 @@ export const Navbar = () => {
 
         {/* Mobile Toggle Button - Uses AppContext or local state if preferred. We'll use local to this component for simplicity or AppContext if we want global access. Here we just rely on CSS checkbox hack for global sidebar state or just separate sidebar component. For strict structure, Sidebar is its own component. We need a way to open it. */}
         <div className="lg:hidden flex items-center gap-2 z-50">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/[0.08] transition-colors duration-300 ease-out inline-flex items-center justify-center backdrop-blur-md"
-            aria-label={theme === 'soft' ? 'Switch to dark theme' : 'Switch to soft theme'}
-            title={theme === 'soft' ? 'Dark theme' : 'Soft theme'}
-          >
-            {theme === 'soft' ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
+          <div className="relative group/theme-mobile flex items-center">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/[0.08] transition-colors duration-300 ease-out inline-flex items-center justify-center relative overflow-hidden backdrop-blur-md"
+              aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+            >
+              <motion.div
+                initial={false}
+                animate={{
+                  y: theme === 'light' ? -30 : 0,
+                  opacity: theme === 'light' ? 0 : 1,
+                  scale: theme === 'light' ? 0.5 : 1,
+                }}
+                transition={{ duration: 0.4, ease: 'backOut' }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Moon size={18} />
+              </motion.div>
+              <motion.div
+                initial={false}
+                animate={{
+                  y: theme === 'light' ? 0 : 30,
+                  opacity: theme === 'light' ? 1 : 0,
+                  scale: theme === 'light' ? 1 : 0.5,
+                }}
+                transition={{ duration: 0.4, ease: 'backOut' }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Sun size={18} />
+              </motion.div>
+            </button>
+          </div>
           <label htmlFor="sidebar-toggle" className="cursor-pointer text-white/90 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md">
             <Menu size={20} />
           </label>

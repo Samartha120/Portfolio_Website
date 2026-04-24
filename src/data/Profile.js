@@ -1,11 +1,11 @@
 export const profile = {
-  name: "Alex Reed",
+  name: "Samartha Shrestha",
   role: "Senior Frontend Engineer",
   tagline: "I build fast, accessible interfaces and clean component systems.",
   bio: "I’m a frontend engineer with a strong product mindset. I care about accessibility, performance, and maintainable UI architecture — and I enjoy partnering closely with design to ship polished experiences.",
-  email: "alex.reed@example.com",
-  phone: "+1 (555) 123-4567",
-  location: "San Francisco, CA",
+  email: "samartha.shrestha@gmail.com",
+  phone: "+91 (XXX) XXX-XXXX",
+  location: "Pune, India",
   socials: {
     github: "https://github.com",
     linkedin: "https://linkedin.com",

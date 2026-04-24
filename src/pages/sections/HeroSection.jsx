@@ -20,14 +20,6 @@ export default function HeroSection() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handleDownloadResume = () => {
-    const a = document.createElement('a');
-    a.href = '/resume.pdf';
-    a.download = 'resume.pdf';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  };
 
   return (
     <Section id="home" className="min-h-[100svh] flex items-center justify-center pt-20 overflow-hidden relative" ref={ref}>
@@ -98,8 +90,9 @@ export default function HeroSection() {
             size="lg"
             className="w-full sm:w-auto text-lg h-14 px-8 group"
             icon={<Download size={20} className="group-hover:text-primary transition-colors" />}
-            type="button"
-            onClick={handleDownloadResume}
+            href="/resume.pdf"
+            download="Samartha_Resume.pdf"
+            aria-label="Download Resume"
           >
             Download Resume
           </Button>

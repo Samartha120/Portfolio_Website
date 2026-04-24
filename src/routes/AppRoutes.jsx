@@ -11,6 +11,7 @@ import Consultancy from '../pages/Consultancy';
 import Media from '../pages/Media';
 import Blog from '../pages/Blog';
 import Contact from '../pages/Contact';
+import CaseStudy from '../pages/CaseStudy';
 
 import ProjectDetails from '../components/projects/ProjectDetails';
 import BlogDetails from '../components/blog/BlogDetails';
@@ -38,6 +39,7 @@ export default function AppRoutes() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogDetails />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/case-study" element={<CaseStudy />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

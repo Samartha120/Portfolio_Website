@@ -5,6 +5,8 @@
 	--app-primary: 59 130 246; /* #3B82F6 */
 	--app-secondary: 139 92 246; /* #8B5CF6 */
 	--app-accent: 16 185 129; /* #10B981 */
+	--app-text: 255 255 255; /* white */
+	--app-bg-inverted: 0 0 0; /* black */
 }
 
 /* Keep dark theme as default per requirements */
@@ -12,9 +14,12 @@ html.dark {
 	color-scheme: dark;
 }
 
-/* Soft-dark theme: slightly lighter, less contrast */
-html.theme-soft {
-	--app-bg: 11 15 25; /* #0B0F19 */
-	--app-surface: 17 24 39; /* #111827 */
+/* Light theme */
+html.theme-soft, html.theme-light {
+	--app-bg: 250 250 250; /* very light grey */
+	--app-surface: 255 255 255; /* white */
+	--app-text: 17 17 17; /* very dark grey */
+	--app-bg-inverted: 255 255 255; /* white (inverts black to white) */
+	color-scheme: light;
 }
 
