@@ -6,7 +6,7 @@ import { Button } from '../common/Button';
 import { sendEmail } from '../../services/emailService';
 import { trackEvent } from '../../services/Analytics';
 
-const initialState = { name: '', email: '', subject: '', message: '' };
+const initialState = { name: '', email: '', domain: '', message: '' };
 
 export const ContactForm = () => {
 	const [values, setValues] = useState(initialState);
@@ -17,7 +17,6 @@ export const ContactForm = () => {
 		return (
 			values.name.trim().length > 1 &&
 			values.email.trim().includes('@') &&
-			values.subject.trim().length > 2 &&
 			values.message.trim().length > 8
 		);
 	}, [values]);
@@ -37,9 +36,9 @@ export const ContactForm = () => {
 
 		try {
 			await sendEmail({
-				from_name: values.name,
-				reply_to: values.email,
-				subject: values.subject,
+				name: values.name,
+				email: values.email,
+				domain: values.domain,
 				message: values.message,
 			});
 
@@ -102,17 +101,27 @@ export const ContactForm = () => {
 							</div>
 						</div>
 
+
+
 						<div className="space-y-2">
-							<label className="text-xs font-bold uppercase tracking-widest text-white/50 ml-1" htmlFor="subject">Subject</label>
-							<input
-								id="subject"
-								name="subject"
-								value={values.subject}
-								onChange={onChange}
-								required
-								className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all font-light shadow-inner backdrop-blur-sm"
-								placeholder="Project inquiry"
-							/>
+							<label className="text-xs font-bold uppercase tracking-widest text-white/50 ml-1" htmlFor="domain">Domain</label>
+							<div className="relative">
+								<select
+									id="domain"
+									name="domain"
+									value={values.domain}
+									onChange={onChange}
+									required
+									className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all font-light shadow-inner backdrop-blur-sm appearance-none cursor-pointer"
+								>
+									<option value="" disabled className="bg-neutral-900 text-white/40">Select your domain</option>
+									<option value="Frontend developer" className="bg-neutral-900">Frontend developer</option>
+									<option value="Backend developer" className="bg-neutral-900">Backend developer</option>
+								</select>
+								<div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+								</div>
+							</div>
 						</div>
 
 						<div className="space-y-2">
@@ -144,8 +153,8 @@ export const ContactForm = () => {
 							>
 								{status === 'sending' ? 'Sending…' : 'Send Message'}
 							</Button>
-							<p className="text-xs text-white/40 mt-3">
-								Uses EmailJS simulation in this project; wire credentials via `.env` to send real emails.
+							<p className="text-xs text-white/40 mt-3 italic text-center">
+								Secured connection via EmailJS browser SDK.
 							</p>
 						</div>
 					</form>
